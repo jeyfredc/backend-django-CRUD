@@ -1,0 +1,33 @@
+# Entornos virtuales
+venv/
+.env/
+
+# Archivos de configuración de IDE
+.vscode/
+.idea/
+
+# Archivos de compilación de Python
+*.pyc
+__pycache__/
+
+# Archivos de base de datos
+*.sqlite3
+
+# Archivos de log
+*.log
+
+# Archivos de migraciones de Django
+*/migrations/*.py
+*/migrations/*.pyc
+
+# Archivos de caché
+*.DS_Store
+Thumbs.db
+
+# Archivos de configuración de Docker
+docker-compose.override.yml
+
+# Archivos de dependencias
+*.egg-info/
+dist/
+build/
