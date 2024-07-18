@@ -10,8 +10,6 @@ venv/
 *.pyc
 __pycache__/
 
-# Archivos de base de datos
-*.sqlite3
 
 # Archivos de log
 *.log

@@ -69,7 +69,9 @@ class DeletePersonById(APIView):
         try:
             person = Persona.objects.get(pk=pk)
             person.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            return Response(
+                {"error": False, "description": f"Persona con ID {pk} eliminada exitosamente"},
+                status=status.HTTP_204_NO_CONTENT)
         except Persona.DoesNotExist:
             return Response({
                 "error": True,

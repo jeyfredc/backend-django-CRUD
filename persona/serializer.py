@@ -31,8 +31,8 @@ class PersonaUpdateSerializer(serializers.ModelSerializer):
     
     
     def validate(self, attrs):
-        if 'name' in attrs and not attrs['name'].isalpha():
-            raise serializers.ValidationError("El nombre debe contener solo letras.")
-        if 'last_name' in attrs and not attrs['last_name'].isalpha():
-            raise serializers.ValidationError("El apellido debe contener solo letras.")
+        if 'name' in attrs and not all(c.isalpha() or c.isspace() for c in attrs['name']):
+            raise serializers.ValidationError("El nombre debe contener solo letras .")
+        if 'last_name' in attrs and not all(c.isalpha() or c.isspace() for c in attrs['last_name']):
+            raise serializers.ValidationError("El apellido debe contener solo letras .")
         return attrs
