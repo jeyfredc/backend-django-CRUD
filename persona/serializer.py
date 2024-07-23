@@ -4,7 +4,8 @@ from .models import Persona
 class PersonaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Persona
-        fields = '__all__'
+        fields = ['id', 'type_document', 'document_number', 'name', 'last_name', 'hobbie']
+        read_only_fields = ['id']
     
     
     def validate(self, attrs):

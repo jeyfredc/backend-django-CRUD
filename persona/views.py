@@ -9,13 +9,16 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class CreatePerson(APIView):
-    permission_classes = [IsAuthenticated]
     @swagger_auto_schema(request_body=PersonaSerializer)
     def post(self, request):
         serializer = PersonaSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({
+                "error": False,
+                "id": serializer.data['id'],
+                "description": f"La persona fue creada exitosamente"
+            }, status=status.HTTP_201_CREATED)
         errors = {
             "error": True,
             "description": serializer.errors['non_field_errors'][0] 
@@ -50,7 +53,10 @@ class EditPersonById(APIView):
             serializer = PersonaUpdateSerializer(person, data=request.data, partial=True)
             if serializer.is_valid():
                 serializer.save()
-                return Response(serializer.data)
+                return Response({
+                "error": False,
+                "description": f"La persona fue editada exitosamente"
+            }, status=status.HTTP_200_OK)
             return Response({
                 "error": True,
                 "description": serializer.errors
@@ -71,7 +77,7 @@ class DeletePersonById(APIView):
             person.delete()
             return Response(
                 {"error": False, "description": f"Persona con ID {pk} eliminada exitosamente"},
-                status=status.HTTP_204_NO_CONTENT)
+                status=status.HTTP_200_OK)
         except Persona.DoesNotExist:
             return Response({
                 "error": True,
